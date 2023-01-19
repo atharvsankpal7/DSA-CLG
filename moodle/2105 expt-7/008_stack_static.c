@@ -1,3 +1,9 @@
+/*
+Name- Atharv Santosh Sankpal
+URN - 21031040
+Practical NO - 7
+Practical Title - Implementing stack using array
+*/
 #include <stdio.h>
 int arr[5], top = -1, ch;
 void push()

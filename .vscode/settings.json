@@ -2,6 +2,11 @@
     "files.associations": {
         "iostream": "cpp",
         "ostream": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "*.tcc": "c",
+        "random": "c",
+        "fstream": "c",
+        "istream": "c",
+        "utility": "c"
     }
 }
