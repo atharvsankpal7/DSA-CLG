@@ -7,6 +7,7 @@
         "random": "c",
         "fstream": "c",
         "istream": "c",
-        "utility": "c"
+        "utility": "c",
+        "stdio.h": "c"
     }
 }

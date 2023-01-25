@@ -1,3 +1,9 @@
+/*
+Name- Atharv Santosh Sankpal
+URN - 21031040
+Practical NO - 9
+Practical Title - Searching Techniques
+*/
 #include <stdio.h>
 int main()
 {
