@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.tcc": "c",
+        "exception": "c",
+        "stack": "c",
+        "stdbool.h": "c"
+    }
+}

@@ -1,32 +1,68 @@
-/*
-Roll No. :- 2029.
-URN No. :- 21031065.
-Batch:-S2
-Name:- Om Sambhaji Sawant.
-
-Practical No.10 :- Program to develop computer game for guessing number between 1-100*/
-
 #include <stdio.h>
-int main()
+
+int partition(int a[], int low, int high)
 {
-      int mid, low, high;
-      char choice;
-      low = 0, high = 100;
-      printf("\nChoose one number between 1 to 100\n");
+      int i, j, pivot, temp, temp1;
+
+      pivot = a[low];
+      i = low + 1;
+      j = high;
       do
       {
-            mid = (low + high) / 2;
-            printf("\nIf the number is present between %d and %d Press 'A'\nIf the number is present between %d and %d Press 'B'\n", low, mid, mid + 1, high);
-            scanf(" %c", &choice);
-            if (choice == 'A')
+            while (a[i] < pivot)
             {
-                  high = mid;
+
+                  i++;
             }
-            else if (choice == 'B')
+            while (a[j] > pivot)
             {
-                  low = mid + 1;
+
+                  j--;
             }
-      } while (low < high);
-      printf("\n%d is your number\n", low);
-      return 0;
+            if (i < j)
+            {
+                  temp = a[i];
+                  a[i] = a[j];
+                  a[j] = temp;
+            }
+      } while (i < j);
+
+      temp = a[low];
+      a[low] = a[j];
+      a[j] = temp;
+
+      return j;
+}
+
+void Quicksort(int a[], int low, int high)
+{
+      if (low < high)
+      {
+            int j = partition(a, low, high);
+            Quicksort(a, low, j - 1);  // Solving Quicksort on LHS
+            Quicksort(a, j + 1, high); // Solving Quicksort on RHS
+      }
+}
+
+int main()
+{
+      int i, n;
+
+      printf("\n Enter the size of array= ");
+      scanf(" %d", &n);
+
+      int a[n];
+      for (i = 0; i < n; i++)
+      {
+            printf("\n Enter the data no.%d=", i + 1);
+            scanf(" %d", &a[i]);
+      }
+
+      Quicksort(a, 0, n - 1);
+
+      printf("\n Sorted List=");
+      for (i = 0; i < n; i++)
+      {
+            printf("\t %d", a[i]);
+      }
 }
