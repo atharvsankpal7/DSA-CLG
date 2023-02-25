@@ -8,6 +8,7 @@
         "fstream": "c",
         "istream": "c",
         "utility": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "cctype": "c"
     }
 }

@@ -1,57 +1,88 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <limits.h>
+int R, C;
 
-#define MAX 100
-
-int move[MAX];
-
-void initMoveArray() {
-    int i;
-    for (i = 0; i < MAX; i++) {
-        move[i] = -1;
-    }
+// Checking if the cell exist or not
+bool issafe(int i, int j)
+{
+    if (i >= 0 && i < R && j >= 0 && j < C)
+        return true;
+    return false;
 }
 
-int getMinThrows(int *move, int n) {
-    int visited[n];
-    int queue[n];
-    int front = 0, rear = 0;
-    int curr;
-    int i;
-    for (i = 0; i < n; i++) {
-        visited[i] = INT_MAX;
-    }
-    visited[0] = 0;
-    queue[rear++] = 0;
-    while (front != rear) {
-        curr = queue[front++];
-        for (i = curr + 1; i <= (curr + 6) && i < n; i++) {
-            if (visited[i] == INT_MAX) {
-                queue[rear++] = i;
-                visited[i] = visited[curr] + 1;
-                if (move[i] != -1) {
-                    queue[rear++] = move[i];
-                    visited[move[i]] = visited[curr] + 1;
-                    break;
+int rotOranges(int v[R][C])
+{
+    bool changed = false;
+    int no = 2;
+    while (true)
+    {
+        for (int i = 0; i < R; i++)
+        {
+            for (int j = 0; j < C; j++)
+            {
+                if (v[i][j] == no)
+                {
+                    if (issafe(i + 1, j) && v[i + 1][j] == 1)
+                    {
+                        v[i + 1][j] = v[i][j] + 1;
+                        changed = true;
+                    }
+                    if (issafe(i, j + 1) && v[i][j + 1] == 1)
+                    {
+                        v[i][j + 1] = v[i][j] + 1;
+                        changed = true;
+                    }
+                    if (issafe(i - 1, j) && v[i - 1][j] == 1)
+                    {
+                        v[i - 1][j] = v[i][j] + 1;
+                        changed = true;
+                    }
+                    if (issafe(i, j - 1) && v[i][j - 1] == 1)
+                    {
+                        v[i][j - 1] = v[i][j] + 1;
+                        changed = true;
+                    }
                 }
             }
         }
+
+        if (!changed)
+            break;
+        changed = false;
+        no++;
     }
-    return visited[n - 1];
+
+    for (int i = 0; i < R; i++)
+    {
+        for (int j = 0; j < C; j++)
+        {
+            if (v[i][j] == 1)
+                return -1;
+        }
+    }
+
+    return no - 2;
 }
 
-int main(void) {
-    int t, n, m, i, a, b;
+int main()
+{
+    int t;
+    printf("Enter the number of test cases --> ");
     scanf("%d", &t);
-    while (t--) {
-        scanf("%d%d", &n, &m);
-        initMoveArray();
-        for (i = 0; i < m; i++) {
-            scanf("%d%d", &a, &b);
-            move[a - 1] = b - 1;
+    for (int i = 0; i < t; i++)
+    {
+        printf("Enter the number of rows and columns respectively for test case %d -->", i + 1);
+        scanf("%d%d", &R, &C);
+        int matrix[R][C];
+        printf("Fill the spaces in the matrix\t \"0\" for empty space  \"1\" for fresh orange  \"2\" for rotten orange\n");
+        for (int i = 0; i < R; i++)
+        {
+            for (int j = 0; j < C; j++)
+            {
+                scanf("%d", &matrix[i][j]);
+            }
         }
-        printf("%d\n", getMinThrows(move, n));
+        printf("The time required to rot oranges is %d\n", rotOranges(matrix));
     }
     return 0;
 }

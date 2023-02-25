@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
-int front = 0, rear = 0;
+
+int front = -1, rear = -1;
 struct Queue
 {
     int i_index;
@@ -81,8 +82,6 @@ int main()
                 {
                     matrix[i_index][j_index] = 2;
                     push(neighbour_r, neighbour_c, ++time);
-                    int x = 1;
-                    printf("%d ", x++);
                 }
             }
         }
@@ -107,7 +106,7 @@ int main()
         }
         if (!flag)
         {
-            //  printf("The time required to rot all the oranges is %d\n", time);
+            printf("The time required to rot all the oranges is %d\n", time);
             for (int i = 0; i < r; i++)
             {
                 for (int j = 0; j < c; j++)
