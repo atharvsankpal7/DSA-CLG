@@ -11,64 +11,35 @@ struct node
 typedef struct node NODE;
 NODE *root = NULL;
 
-// Insert Operations
-NODE *insert(NODE *p, int data)
+NODE *insert(NODE *p, int value)
 {
     if (p == NULL)
     {
-        NODE *node = (NODE *)malloc(sizeof(NODE));
-        node->lchild = NULL;
-        node->rchild = NULL;
-        node->data = data;
-        return node;
+        p = (NODE *)malloc(sizeof(NODE));
+        p->data = value;
+        p->lchild = NULL;
+        p->rchild = NULL;
     }
-    if (data < p->data)
-    {
-        p->lchild = insert(p->lchild, data);
-    }
+    else if (p->data > value)
+        p->lchild = insert(p->lchild, value);
     else
-    {
-        p->rchild = insert(p->rchild, data);
-    }
+        p->rchild = insert(p->rchild, value);
 }
-
-// search operation
-bool search(NODE *p, int data)
+bool search(NODE *p, int key)
 {
-    p = root;
     while (p != NULL)
     {
-        if (data < p->data)
-        {
+        if (p->data > key)
             p = p->lchild;
-        }
-        else if (data > p->data)
-        {
+        else if (p->data < key)
             p = p->rchild;
-        }
         else
-        {
             return true;
-        }
     }
     return false;
 }
-
-// Traversal methods
-void inorder(NODE *p)
-{
-
-    if (p != NULL)
-    {
-        inorder(p->lchild);
-        printf("%d ", p->data);
-        inorder(p->rchild);
-    }
-}
-
 void preorder(NODE *p)
 {
-
     if (p != NULL)
     {
         printf("%d ", p->data);
@@ -76,10 +47,17 @@ void preorder(NODE *p)
         preorder(p->rchild);
     }
 }
-
+void inorder(NODE *p)
+{
+    if (p != NULL)
+    {
+        inorder(p->lchild);
+        printf("%d ", p->data);
+        inorder(p->rchild);
+    }
+}
 void postorder(NODE *p)
 {
-
     if (p != NULL)
     {
         postorder(p->lchild);
@@ -87,7 +65,6 @@ void postorder(NODE *p)
         printf("%d ", p->data);
     }
 }
-
 int main()
 {
     int data, opt, found;
@@ -98,7 +75,7 @@ int main()
 
     while (1)
     {
-        printf("\n\n1.Add new node\n2.Search node\n3.In order traversal\n4.Pre order traversal\n5.Post order traversal\n6.Exit\n Choose = ");
+        printf("1.Add new node\n2.Search node\n3.In order traversal\n4.Pre order traversal\n5.Post order traversal\n6.Exit\nChoose = ");
 
         scanf("%d", &opt);
         if (opt == 6)
@@ -121,11 +98,11 @@ int main()
 
             if (found)
             {
-                printf("%d value is found in the tree", data);
+                printf("%d value is found in the tree\n", data);
             }
             else
             {
-                printf("%d value not found", data);
+                printf("%d value not found\n", data);
             }
             break;
 

@@ -18,21 +18,21 @@ int main()
     mid = (low + high) / 2;
     while (low <= high)
     {
-        if (key == arr[mid])
+        if (arr[mid] == key)
         {
             flag = 1;
             break;
         }
-        if (key < arr[mid])
+        else if (arr[mid] > key)
         {
             high = mid - 1;
+            mid = (low + high) / 2;
         }
-        if (key > arr[mid])
+        else
         {
             low = mid + 1;
+            mid = (low + high) / 2;
         }
-
-        mid = (low + high) / 2;
     }
     if (flag == 1)
     {

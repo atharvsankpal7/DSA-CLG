@@ -13,48 +13,45 @@ void print_arr(int a[])
 }
 void bubble_sort(int a[])
 {
-    for (int i = 0; i < 15 - 1; i++)
+    for (int i = 0; i < 15; i++)
     {
-        for (int j = 0; j < 15 - 1 - i; j++)
+        for (int j = 0; j < 15 - i - 1; j++)
         {
             if (a[j] > a[j + 1])
-            {
                 swap(&a[j], &a[j + 1]);
-            }
         }
     }
 }
 void selection_sort(int a[])
 {
-    for (int i = 0; i < 15; i++)
+    for (int i = 0; i < 15 - 1; i++)
     {
-        for (int j = i; j < 15; j++)
+        for (int j = i+1; j < 15; j++)
         {
             if (a[i] > a[j])
-            {
-                swap(&a[i], &a[j]);
-            }
+                swap(&a[j], &a[i]);
         }
     }
 }
 void insertion_sort(int a[])
 {
+    int temp, j;
     for (int i = 0; i < 15; i++)
     {
-        int j = i - 1 ;
-        int temp = a[i];
-        while (a[j] > temp && j > -1)
+        j = i - 1;
+        temp = a[i];
+        while (j > -1 && a[j] > temp)
         {
             a[j + 1] = a[j];
             j--;
         }
-        a[j+1] = temp;
+        a[j + 1] = temp;
     }
 }
 int main()
 {
-    int arr[15] = {1, 52, 556, 5, 265, 66, 4, 4, 6, 6, 656, 4, 11, 65, 46};
-    bubble_sort(arr);
+    int arr[15] = {15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 2, 1};
+    selection_sort(arr);
     print_arr(arr);
     return 0;
 }
